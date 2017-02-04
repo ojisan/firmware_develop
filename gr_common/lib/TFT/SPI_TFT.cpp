@@ -1,5 +1,5 @@
 /*
- * SPI TFT�֘A
+ * SPI TFT関連
  *
  * Copyright (c) 2016 Wakayama.rb Ruby Board developers
  *
@@ -9,24 +9,28 @@
  */
 #define PROGMEM
 #include <Arduino.h>
+#include <SPI.h>
 #include "SPI_TFT.h"
 #include "font.h"
 #include <avr/pgmspace.h>
 
+static SPISettings settings;
+static uint8_t chip_select_asserted = 0;
+void spiSend(uint8_t b) {
+  SPI.transfer(b);
+}
 
 void TFT_chipSelectHigh(void) {
   digitalWrite(TFT_CHIP_SELECT_PIN, HIGH);
-
 }
 void TFT_chipSelectLow(void) {
-
   digitalWrite(TFT_CHIP_SELECT_PIN, LOW);
 }
 void TFT_cmd(uint8_t cmd) {
   rs_Low();
   // select card
   TFT_chipSelectLow();
-  sendSPI(cmd);
+  spiSend(cmd);
   // send argument
   TFT_chipSelectHigh();
   rs_High();
@@ -35,22 +39,24 @@ void TFT_dat(uint8_t data) {
   rs_High(); 
   // select card
   TFT_chipSelectLow();
-  sendSPI(data);
+  spiSend(data);
   // send argument
   TFT_chipSelectHigh();
 }
 void TFT_dat16(uint16_t data) {
-   rs_High(); 
+  rs_High(); 
   // select card
   TFT_chipSelectLow();
-  sendSPI16(data);
+  spiSend((uint8_t)(data>>8));
+  spiSend((uint8_t)data);
   // send argument
   TFT_chipSelectHigh();
 }
 void TFT_gram(uint16_t gram) {
   // select card
   TFT_chipSelectLow();
-  sendSPI16(gram);
+  spiSend((uint8_t)(gram>>8));
+  spiSend((uint8_t)gram);
   // send argument
   TFT_chipSelectHigh();
 }
@@ -83,7 +89,9 @@ uint8_t TFT_spiinit() {
   pinMode(SPI_SCK_PIN, OUTPUT);
   pinMode(TFT_RES_PIN, OUTPUT);
   pinMode(TFT_RS_PIN, OUTPUT);
-
+  SPI.begin();
+  settings = SPISettings(400000, MSBFIRST, SPI_MODE0);
+  SPI.beginTransaction(settings);
   return true; //
 
 }
@@ -373,7 +381,8 @@ void TFT_drawVLine(int16_t x, int16_t y, int16_t h, uint16_t color)
   	uint8_t hi = color >> 8, lo = color;
   	TFT_chipSelectLow();			/* CS=L		     */
   	while (h--) {
-	sendSPI16(color);
+	spiSend((uint8_t)color>>8);
+	spiSend((uint8_t)color);
   	}
   	TFT_chipSelectHigh();			/* CS=H		     */
   }
@@ -389,7 +398,8 @@ void TFT_drawHLine(int16_t x, int16_t y, int16_t w, uint16_t color)
   uint8_t hi = color >> 8, lo = color;
   TFT_chipSelectLow();			/* CS=L		     */
   while (w--) {
-	sendSPI16(color);
+		spiSend((uint8_t)color>>8);
+	spiSend((uint8_t)color);
   }
   TFT_chipSelectHigh();			/* CS=H		     */
   }
