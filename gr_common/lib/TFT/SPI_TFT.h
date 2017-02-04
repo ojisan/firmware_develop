@@ -34,60 +34,7 @@ uint8_t const TFT_RS_PIN = 3;
 #define res_Low()	digitalWrite(TFT_RES_PIN, LOW)
 #define rs_High()	digitalWrite(TFT_RS_PIN, HIGH)
 #define rs_Low()	digitalWrite(TFT_RS_PIN, LOW)
-#define CLK_OUT()	sck_Low();__NOP();__NOP();\
-					sck_High();__NOP();__NOP();
 
-#define sendSPI(x)							\
-		(0x80 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x40 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x20 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x10 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x08 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x04 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x02 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x01 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();
-/* Send 16-bit Data Macro */
-#define sendSPI16(x)						\
-		(0x8000 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x4000 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x2000 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x1000 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0800 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0400 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0200 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0100 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0080 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0040 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0020 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0010 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0008 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0004 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0002 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();							\
-		(0x0001 & x) ? sdi_High() : sdi_Low();	\
-		CLK_OUT();
 
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
@@ -135,8 +82,9 @@ int TFT_puts(uint16_t col, uint16_t row, char *pch, uint16_t fg, uint16_t bg, ui
 void TFT_drawLine(int16_t xs,int16_t ys,int16_t xe,int16_t ye, uint16_t colour);
 void TFT_drawVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
 void TFT_drawHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
-
+void TFT_drawChar(int16_t col, int16_t row, char c, uint16_t fg, uint16_t bg, uint16_t scale);
   // private functions
+  void spiSend(uint8_t b);
   void TFT_chipSelectHigh(void);
   void TFT_chipSelectLow(void);
   void TFT_cmd(uint8_t cmd);
@@ -147,5 +95,5 @@ void TFT_drawHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
   uint8_t TFT_spiinit();
   void TFT_reset();
   void TFT_setDisplayWindow(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
-  void TFT_drawChar(int16_t col, int16_t row, char c, uint16_t fg, uint16_t bg, uint16_t scale);
+  
 #endif  // SPI_TFT_h
