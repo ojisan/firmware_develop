@@ -1,5 +1,5 @@
 /*
- * SPI_TFTŠÖ˜A
+ * SPI_TFTé–¢é€£
  *
  * Copyright (c) 2016 Wakayama.rb Ruby Board developers
  *
@@ -21,10 +21,10 @@
 #include "sKernel.h"
 
 //**************************************************
-// TFT‚ğputs‚µ‚Ü‚·: TFT_puts
+// TFTã‚’putsã—ã¾ã™: TFT_puts
 //  TFT_puts(x, y, pch, fg, bg, scale)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_puts(mrb_state *mrb, mrb_value self)
 {
@@ -34,16 +34,16 @@ char *pch;
 mrb_int fg, bg, scale;
 
 	mrb_get_args(mrb, "iiSiii", &x, &y, &vpch, &fg, &bg, &scale);
-//	pch = mrb_str_to_cstr(mrb, vpch);
-	pch = RSTRING_PTR(vpch);
+	pch = mrb_str_to_cstr(mrb, vpch);
+//	pch = RSTRING_PTR(vpch);
 	TFT_puts(x, y, pch, fg, bg, scale);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğdrawHLine‚µ‚Ü‚·: TFT_drawHLine
+// TFTã‚’drawHLineã—ã¾ã™: TFT_drawHLine
 //  TFT_drawHLine(x, y, w, color)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_drawHLine(mrb_state *mrb, mrb_value self)
 {
@@ -52,13 +52,13 @@ mrb_int color;
 
 	mrb_get_args(mrb, "iiii", &x, &y, &w, &color);
 	TFT_drawHLine(x, y, w, color);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğdrawVLine‚µ‚Ü‚·: TFT_drawVLine
+// TFTã‚’drawVLineã—ã¾ã™: TFT_drawVLine
 //  TFT_drawVLine(xs, ys, xe, ye, color)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_drawVLine(mrb_state *mrb, mrb_value self)
 {
@@ -67,13 +67,13 @@ mrb_int color;
 
 	mrb_get_args(mrb, "iiii", &x, &y, &h, &color);
 	TFT_drawVLine(x, y, h, color);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğdrawLine‚µ‚Ü‚·: TFT_drawLine
+// TFTã‚’drawLineã—ã¾ã™: TFT_drawLine
 //  TFT_drawLine(xs, ys, xe, ye, color)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_drawLine(mrb_state *mrb, mrb_value self)
 {
@@ -82,13 +82,13 @@ mrb_int color;
 
 	mrb_get_args(mrb, "iiiii", &xs, &ys, &xe, &ye, &color);
 	TFT_drawLine(xs, ys, xe, ye, color);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğdrawPixel‚µ‚Ü‚·: TFT_drawPixel
+// TFTã‚’drawPixelã—ã¾ã™: TFT_drawPixel
 //  TFT_drawPixel(x, y, color)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_drawPixel(mrb_state *mrb, mrb_value self)
 {
@@ -97,13 +97,13 @@ mrb_int color;
 	mrb_get_args(mrb, "iii", &x, &y, &color);
 	
 	TFT_drawPixel(x, y, color);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğFillRect‚µ‚Ü‚·: TFT_FillRect
+// TFTã‚’FillRectã—ã¾ã™: TFT_FillRect
 //  TFT_FillRect(x, y, w, h, color)
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_fillRect(mrb_state *mrb, mrb_value self)
 {
@@ -113,41 +113,41 @@ mrb_int color;
 	
 	TFT_fillRect(x, y, w, h, color);
 
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğclear‚µ‚Ü‚·: TFT_clear
+// TFTã‚’clearã—ã¾ã™: TFT_clear
 //  TFT_clear()
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_clear(mrb_state *mrb, mrb_value self)
 {
 mrb_int color;
 	mrb_get_args(mrb, "i", &color);
 	TFT_clear(color);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğ‰ñ“]‚µ‚Ü‚·: TFT_setRotation
+// TFTã‚’å›è»¢ã—ã¾ã™: TFT_setRotation
 //  TFT_setRotation()
 //
-// –ß‚è’l‚Í‚È‚µ
+// æˆ»ã‚Šå€¤ã¯ãªã—
 //**************************************************
 mrb_value mrb_TFT_setRotation(mrb_state *mrb, mrb_value self)
 {
 	uint8_t m;
 	mrb_get_args(mrb, "i", &m);
 	TFT_setRotation(m);
-	return mrb_nil_value();	//–ß‚è’l‚Í–³‚µ‚Å‚·‚æB 
+	return mrb_nil_value();	//æˆ»ã‚Šå€¤ã¯ç„¡ã—ã§ã™ã‚ˆã€‚ 
 }
 //**************************************************
-// TFT‚ğ‹N“®‚µ‚Ü‚·: TFT.init
+// TFTã‚’èµ·å‹•ã—ã¾ã™: TFT.init
 //  TFT.init()
 //
-// –ß‚è’l‚ÍˆÈ‰º‚Ì‚Æ‚¨‚è
-//	0: ‹N“®¸”s
-//	1: ‹N“®¬Œ÷
+// æˆ»ã‚Šå€¤ã¯ä»¥ä¸‹ã®ã¨ãŠã‚Š
+//	0: èµ·å‹•å¤±æ•—
+//	1: èµ·å‹•æˆåŠŸ
 //**************************************************
 //mrb_value mrb_TFT_init(mrb_state *mrb, mrb_value self)
 //{
@@ -155,7 +155,7 @@ mrb_value mrb_TFT_setRotation(mrb_state *mrb, mrb_value self)
 //}
 
 //**************************************************
-// ƒ‰ƒCƒuƒ‰ƒŠ‚ğ’è‹`‚µ‚Ü‚·
+// ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã‚’å®šç¾©ã—ã¾ã™
 //**************************************************
 int TFT_Init(mrb_state *mrb)
 {
